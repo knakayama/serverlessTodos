@@ -4,6 +4,8 @@
 # will auto fill in the TODOS_ENDPOINT environment variable
 
 node helpers/getEndpoint.js > .build/endpoint.out
+cat .build/endpoint.out
 export TODOS_ENDPOINT="$(cat .build/endpoint.out)"
+echo $TODOS_ENDPOINT
 
 echo $TODOS_ENDPOINT
