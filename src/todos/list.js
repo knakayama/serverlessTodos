@@ -8,14 +8,13 @@ const params = {
   TableName: process.env.TABLE_NAME,
 };
 
-module.exports.list = (event, context, callback) => {
+exports.list = (event, context, callback) => {
   // fetch all todos from the database
   dynamoDb.scan(params, (error, result) => {
     // handle potential errors
     if (error) {
       console.error(error); // eslint-disable-line no-console
       callback(new Error('Couldn\'t fetch the todos.'));
-      return;
     }
 
     // create a resonse

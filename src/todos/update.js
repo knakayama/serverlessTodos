@@ -1,12 +1,13 @@
-'use strict';
-
 const AWS = require('aws-sdk');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-module.exports.update = (event, context, callback) => {
+exports.update = (event, context, callback) => {
   const timestamp = new Date().getTime();
-  const data = JSON.parse(event.body);
+  const data = JSON.parse(event.body, (key, value) => {
+    if (key === 'checked') return !!value;
+    return value;
+  });
 
   // validation
   if (typeof data.text !== 'string' && typeof data.checked !== 'boolean') {
@@ -16,7 +17,7 @@ module.exports.update = (event, context, callback) => {
   }
 
   const params = {
-	// PCJ: Minor change from original, use environment variable for stage sensitive table name
+  // PCJ: Minor change from original, use environment variable for stage sensitive table name
     TableName: process.env.TABLE_NAME,
     Item: {
       id: event.pathParameters.id,
@@ -32,15 +33,14 @@ module.exports.update = (event, context, callback) => {
     if (error) {
       console.error(error); // eslint-disable-line no-console
       callback(new Error('Couldn\'t update the todo item.'));
-      return;
     }
 
     // create a resonse
     const response = {
       statusCode: 200,
-      	// PCJ: Minor change from original, return full item inserted instead of empty result
-		// body: JSON.stringify(result.Item),
-		body: JSON.stringify(params.Item),
+        // PCJ: Minor change from original, return full item inserted instead of empty result
+    // body: JSON.stringify(result.Item),
+    body: JSON.stringify(params.Item),
     };
     callback(null, response);
   });

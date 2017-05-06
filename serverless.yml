@@ -2,11 +2,15 @@ service: serverless-todo-cicd
 
 frameworkVersion: ">=1.1.0 <2.0.0"
 
+custom:
+  config: ${file(config.yml)}
+
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs6.10
+  region: ${self:custom.config.region}
   environment:
-      TABLE_NAME: todos-${opt:stage, self:provider.stage}
+      TABLE_NAME: todos-${opt:stage, self:custom.config.stage}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -67,18 +71,15 @@ functions:
 resources:
   Resources:
     TodosDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
+      Type: AWS::DynamoDB::Table
       Properties:
+        TableName: todos-${opt:stage, self:custom.config.stage}
         AttributeDefinitions:
-          -
-            AttributeName: id
+          - AttributeName: id
             AttributeType: S
         KeySchema:
-          -
-            AttributeName: id
+          - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'todos-${opt:stage, self:provider.stage}'
