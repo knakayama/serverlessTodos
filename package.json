@@ -24,7 +24,7 @@
   "dependencies": {},
   "scripts": {
     "test": "./node_modules/.bin/mocha",
-    "test:remote": ". ./helpers/endpoint.sh && echo $TODOS_ENDPOINT && npm test",
+    "test:remote": "cat .build/deploy.out && . ./helpers/endpoint.sh && echo $TODOS_ENDPOINT && npm test",
     "clean": "rm -rf node_modules && rm -rf src/node_modules",
     "deploy": "./node_modules/.bin/sls deploy | tee .build/deploy.out",
     "deploy:cicd": "./node_modules/.bin/sls deploy -s cicd | tee .build/deploy.out",
