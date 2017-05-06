@@ -24,10 +24,10 @@
   "dependencies": {},
   "scripts": {
     "test": "./node_modules/.bin/mocha",
-    "test:remote": "mkdir -p .build; bash ./helpers/endpoint.sh; npm test",
+    "test:remote": "mkdir -p .build; . ./helpers/endpoint.sh; npm test",
     "clean": "rm -rf node_modules && rm -rf src/node_modules",
     "deploy": "./node_modules/.bin/sls deploy | tee .build/deploy.out",
-    "deploy:cicd": "./node_modules/.bin/sls deploy -s cicd -v | tee .build/deploy.out",
+    "deploy:cicd": "./node_modules/.bin/sls deploy -s cicd | tee .build/deploy.out",
     "predeploy": "mkdir -p .build",
     "predeploy:cicd": "npm run predeploy",
     "install:lambda": "cd src; npm install; cd ..",
