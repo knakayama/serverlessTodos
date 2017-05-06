@@ -29,7 +29,7 @@
     "deploy": "./node_modules/.bin/sls deploy | tee .build/deploy.out",
     "deploy:cicd": "./node_modules/.bin/sls deploy -s cicd | tee .build/deploy.out",
     "predeploy": "mkdir -p .build",
-    "predeploy:cicd": "npm run predeploy",
+    "predeploy:cicd": "mkdir -p .build && npm run predeploy",
     "install:lambda": "cd src; npm install; cd ..",
     "install": "npm run install:lambda"
   },
