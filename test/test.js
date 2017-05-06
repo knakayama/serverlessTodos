@@ -4,7 +4,7 @@ const rp = require('request-promise');
 describe('API', () => {
   const createdBody = { text: 'Learn Serverless' };
   const updatedBody = { text: 'Test Serverless' };
-  const uri = process.env.TODOS_ENDPOINT;
+  const uri = `${process.env.TODOS_ENDPOINT}/todos`;
   let id;
 
   //beforeEach(() => {

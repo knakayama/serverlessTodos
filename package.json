@@ -24,12 +24,12 @@
   "dependencies": {},
   "scripts": {
     "test": "./node_modules/.bin/mocha",
-    "test:remote": "export TODOS_ENDPOINT=$(node helpers/getEndpoint.js); npm test",
+    "test:remote": "export TODOS_ENDPOINT=$(./node_modules/.bin/sls info -v | grep -F 'ServiceEndpoint' | cut -d' ' -f2); npm test",
     "clean": "rm -rf node_modules && rm -rf src/node_modules",
-    "deploy": "./node_modules/.bin/sls deploy | tee .build/deploy.out",
-    "deploy:cicd": "./node_modules/.bin/sls deploy -s cicd | tee .build/deploy.out",
+    "deploy": "./node_modules/.bin/sls deploy",
+    "deploy:cicd": "./node_modules/.bin/sls deploy -s cicd",
     "predeploy": "mkdir -p .build",
-    "predeploy:cicd": "mkdir -p .build && npm run predeploy",
+    "predeploy:cicd": "mkdir -p .build",
     "install:lambda": "cd src; npm install; cd ..",
     "install": "npm run install:lambda"
   },
