@@ -68,18 +68,4 @@ functions:
           method: delete
           cors: true
 
-resources:
-  Resources:
-    TodosDynamoDbTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: todos-${opt:stage, self:custom.config.stage}
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+resources: ${file(${self:custom.config.resources})}

@@ -1,0 +1,25 @@
+Parameters:
+  TableName:
+    Type: String
+    Default: todos-${opt:stage, self:custom.config.stage}
+
+Resources:
+  TodosDynamoDbTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName:
+        Ref: TableName
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
+Outputs:
+  TableName:
+    Value:
+      Ref: TodosDynamoDbTable

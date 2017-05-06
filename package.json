@@ -21,12 +21,7 @@
     "Sebastian Müller <mail@sbstjn.com> (https://sbstjn.com)"
   ],
   "license": "MIT",
-  "dependencies": {
-    "aws-sdk": "^2.6.7",
-    "request": "^2.79.0",
-    "mocha": "^3.2.0",
-    "serverless": "^1.7.0"
-  },
+  "dependencies": {},
   "scripts": {
     "test": "./node_modules/.bin/mocha",
     "test:remote": "mkdir -p .build; ./helpers/endpoint.sh; npm test",
@@ -39,11 +34,17 @@
     "install": "npm run install:lambda"
   },
   "devDependencies": {
+    "aws-sdk": "^2.49.0",
     "babel-eslint": "^7.2.3",
+    "chai": "^3.5.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^5.0.0",
-    "eslint-plugin-react": "^7.0.0"
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "mocha": "^3.3.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0",
+    "serverless": "^1.12.1"
   }
 }
